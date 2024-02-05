@@ -88,11 +88,11 @@ const HashMap = () => {
   const remove = (key) => {
     const index = hash(key);
     if (buckets[index].length === 1 && buckets[index][0][0] === key) {
-      delete buckets[index];
+      buckets[index] = undefined;
     } else {
       for (let i = 0; i < buckets[index].length; i++) {
         if (buckets[index][i][0] === key) {
-          delete buckets[index][i];
+          buckets[index][i] = undefined;
         }
       }
     }
@@ -173,4 +173,6 @@ const HashMap = () => {
 
 const test = HashMap();
 test.set("Person", "Oliver");
+test.log();
+test.remove("Person");
 test.log();
