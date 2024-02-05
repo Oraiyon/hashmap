@@ -10,17 +10,14 @@ const HashMap = () => {
 
   const getCapacity = () => console.log(capacity);
 
-  const stringToNumber = (string) => {
+  const hash = (string) => {
     let hashCode = 0;
+    // Any prime
     const primeNumber = 31;
     for (let i = 0; i < string.length; i++) {
       hashCode = primeNumber * hashCode + string.charCodeAt(i);
     }
     return hashCode % limit;
-  };
-
-  const hash = (name) => {
-    return stringToNumber(name);
   };
 
   const set = (key, value) => {
@@ -176,3 +173,4 @@ const HashMap = () => {
 
 const test = HashMap();
 test.set("Person", "Oliver");
+test.log();
