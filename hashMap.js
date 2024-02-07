@@ -1,19 +1,12 @@
 const HashMap = () => {
   const buckets = [];
-  let limit = 8;
-  let capacity = 0;
-  const loadFactor = 0.75;
+  let limit = 16;
 
   const log = () => console.log(buckets);
 
-  const getLimit = () => console.log(limit);
-
-  const getCapacity = () => console.log(capacity);
-
   const hash = (string) => {
     let hashCode = 0;
-    // Any prime
-    const primeNumber = 31;
+    const primeNumber = 31; // Any prime works
     for (let i = 0; i < string.length; i++) {
       hashCode = primeNumber * hashCode + string.charCodeAt(i);
     }
@@ -26,13 +19,7 @@ const HashMap = () => {
     }
     const index = hash(key);
     if (buckets[index] === undefined) {
-      if (capacity + 1 > limit * loadFactor) {
-        console.log(`Limit Of ${limit} Reached`);
-        limit = limit * 2;
-        console.log("New Limit " + limit);
-      }
       buckets[index] = [[key, value]];
-      capacity++;
     } else {
       let inserted = false;
       for (let i = 0; i < buckets[index].length; i++) {
@@ -42,13 +29,7 @@ const HashMap = () => {
         }
       }
       if (inserted === false) {
-        if (capacity + 1 > limit * loadFactor) {
-          console.log(`Limit Of ${limit} Reached`);
-          limit = limit * 2;
-          console.log("New Limit " + limit);
-        }
         buckets[index].push([key, value]);
-        capacity++;
       }
     }
   };
@@ -118,7 +99,7 @@ const HashMap = () => {
   const keys = () => {
     const keysArray = [];
     for (let i = 0; i < buckets.length; i++) {
-      if (buckets[i] !== undefined) {
+      if (buckets[i]) {
         for (let j = 0; j < buckets[i].length; j++) {
           keysArray.push(buckets[i][j][0]);
         }
@@ -131,7 +112,7 @@ const HashMap = () => {
   const values = () => {
     const valuesArray = [];
     for (let i = 0; i < buckets.length; i++) {
-      if (buckets[i] !== undefined) {
+      if (buckets[i]) {
         for (let j = 0; j < buckets[i].length; j++) {
           valuesArray.push(buckets[i][j][1]);
         }
@@ -144,20 +125,19 @@ const HashMap = () => {
   const entries = () => {
     const entriesArray = [];
     for (let i = 0; i < buckets.length; i++) {
-      if (buckets[i] !== undefined) {
+      if (buckets[i]) {
         for (let j = 0; j < buckets[i].length; j++) {
           entriesArray.push(buckets[i][j]);
         }
       }
     }
-    console.log(entriesArray);
+    test.remove("Person");
+    test.log();
     return entriesArray;
   };
 
   return {
     log,
-    getLimit,
-    getCapacity,
     hash,
     set,
     get,
@@ -172,7 +152,6 @@ const HashMap = () => {
 };
 
 const test = HashMap();
-test.set("Person", "Oliver");
-test.log();
-test.remove("Person");
+test.set("Name", "Oliver");
+test.set("Name", "Thor");
 test.log();
