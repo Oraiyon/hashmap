@@ -10,7 +10,7 @@ const HashMap = () => {
     for (let i = 0; i < string.length; i++) {
       hashCode = primeNumber * hashCode + string.charCodeAt(i);
     }
-    return hashCode % limit;
+    return hashCode % limit; // Returns number within limit
   };
 
   const set = (key, value) => {
@@ -73,7 +73,7 @@ const HashMap = () => {
     } else {
       for (let i = 0; i < buckets[index].length; i++) {
         if (buckets[index][i][0] === key) {
-          buckets[index][i] = undefined;
+          buckets[index][i] = null;
         }
       }
     }
@@ -91,7 +91,7 @@ const HashMap = () => {
   };
 
   const clear = () => {
-    while (buckets.length !== 0) {
+    while (buckets.length > 0) {
       buckets.pop();
     }
   };
